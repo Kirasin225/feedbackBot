@@ -1,0 +1,49 @@
+server:
+  port: 8080
+
+spring:
+  config:
+    import:
+      - 'optional:dotenv'
+
+  datasource:
+    hikari:
+      connection-init-sql: "SET TIME ZONE 'UTC'"
+    url: jdbc:postgresql://localhost:5432/feedback
+    username: ${POSTGRES_USER:postgres}
+    password: ${POSTGRES_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        format_sql: true
+
+flyway:
+  enabled: true
+
+telegram:
+  bot:
+    username: ${TELEGRAM_BOT_USERNAME:TestBotForMe}
+    token: ${TELEGRAM_BOT_TOKEN:}
+
+openai:
+  apiUrl: https://api.openai.com/v1
+  apiKey: ${OPENAI_API_KEY:}
+
+google:
+  docs:
+    documentId: ${GOOGLE_DOC_ID:}
+    credentialsPath: classpath:google/credentials.json
+
+trello:
+  enabled: ${TRELLO_ENABLED:true}
+  key: ${TRELLO_KEY:}
+  token: ${TRELLO_TOKEN:}
+  listId: ${TRELLO_LIST_ID:}

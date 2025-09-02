@@ -1,0 +1,70 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="utf-8">
+  <title>Feedback Admin</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<h2>Відгуки</h2>
+
+<!-- Форма фільтрації (GET) -->
+<form th:action="@{/admin}" method="get">
+  <label>Філія: <input type="text" name="branch" th:value="${branch}"/></label>
+
+  <label>Посада:
+    <select name="role">
+      <option th:if="${role == null}" value="">-- всі --</option>
+      <option th:each="r : ${roles}"
+              th:value="${r}"
+              th:text="${r}"
+              th:selected="${r == role}">MECHANIC</option>
+    </select>
+  </label>
+
+  <label>Критичність від:
+    <select name="minCriticality">
+      <option th:if="${minCriticality == null}" value="">--</option>
+      <option value="1" th:selected="${minCriticality == 1}">1</option>
+      <option value="2" th:selected="${minCriticality == 2}">2</option>
+      <option value="3" th:selected="${minCriticality == 3}">3</option>
+      <option value="4" th:selected="${minCriticality == 4}">4</option>
+      <option value="5" th:selected="${minCriticality == 5}">5</option>
+    </select>
+  </label>
+
+  <label>до:
+    <select name="maxCriticality">
+      <option th:if="${maxCriticality == null}" value="">--</option>
+      <option value="1" th:selected="${maxCriticality == 1}">1</option>
+      <option value="2" th:selected="${maxCriticality == 2}">2</option>
+      <option value="3" th:selected="${maxCriticality == 3}">3</option>
+      <option value="4" th:selected="${maxCriticality == 4}">4</option>
+      <option value="5" th:selected="${maxCriticality == 5}">5</option>
+    </select>
+  </label>
+
+  <button type="submit">Фільтрувати</button>
+  <a th:href="@{/admin}">Скинути</a>
+</form>
+
+<table border="1" cellpadding="6" cellspacing="0">
+  <thead>
+  <tr>
+    <th>ID</th><th>Дата</th><th>Посада@Філія</th>
+    <th>Текст</th><th>Тональність</th><th>Крит.</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="f : ${page.content}">
+    <td th:text="${f.id}">1</td>
+    <td th:text="${#dates.format(f.createdAt,'yyyy-MM-dd HH:mm')}">2025-01-01</td>
+    <td th:text="${f.staffProfile.role + '@' + f.staffProfile.branch}">MECHANIC@X</td>
+    <td th:text="${f.text}">text</td>
+    <td th:text="${f.sentiment}">NEUTRAL</td>
+    <td th:text="${f.criticality}">5</td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

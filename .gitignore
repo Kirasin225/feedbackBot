@@ -1,0 +1,52 @@
+# Java / Maven
+/target/
+/out/
+*.class
+*.jar
+*.war
+
+# Maven wrapper — не игнорировать папку .mvn если используете wrapper
+
+# IDEs
+/.idea/
+/*.iml
+/.project
+/.classpath
+/.settings/
+/.vscode/
+
+# Logs
+*.log
+logs/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Environment & secrets
+.env
+.env.*
+/src/main/resources/google/credentials.json
+/src/main/resources/google/*.json
+*.keystore
+*.jks
+*.pem
+*.crt
+*.key
+*.p12
+
+# Build / distribution
+/dist/
+/build/
+
+# Database / local files
+*.db
+*.sql
+*.sqlite
+
+# Docker overrides / local compose
+docker-compose.override.yml
+
+# Misc
+.idea/
+*.orig
